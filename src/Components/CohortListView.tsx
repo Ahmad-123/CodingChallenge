@@ -11,7 +11,9 @@ const CohortListView = () => {
 
   const changeCohorts = (event: React.MouseEvent<HTMLElement>) => {
     if (event.currentTarget.getAttribute('name') === 'user') {
-      let temp: Array<CohortType> = CohortList.filter((Cohort) => {
+      // if user has clicked See Your Registered Cohorts
+      // filtering out all those cohorts whose memberlist has the userId
+      let temp: Array<CohortType> = cohorts.filter((Cohort) => {
         if (Cohort.members) {
           for (let i = 0; i < Cohort.members.length; i++) {
             if (Cohort.members[i] === exampleUser.id) return true
@@ -27,22 +29,24 @@ const CohortListView = () => {
     }
   }
 
-  const registerCohorts = (id: string, cohortId: string) => {
-    let targetIndex = -1
+  const registerCohorts = (courseId: string, cohortId: string) => {
+    //  First we will check if that cohort is already registered by the user
+    let registered = false
     cohorts.map((cohort, index) => {
-      if (cohort['course'] === id) {
+      if (cohort['course'] === courseId) {
         cohort.members?.map((member) => {
-          if (member === exampleUser.id) targetIndex = index
+          if (member === exampleUser.id) registered = true
         })
       }
       return cohort
     })
-    if (targetIndex != -1) {
+    if (registered) {
       //  cohart is already registered
       alert(
         'You have already registered the cohart for that course: You can have only 1 cohart against paricular course'
       )
     } else {
+      //  if that cohort is not already registered by the user then we will add that user to members list of that cohort
       let temp: Array<CohortType> = cohorts.map((cohort, index) => {
         if (cohort['id'] === cohortId) {
           cohort.members.push(exampleUser.id)
@@ -56,12 +60,13 @@ const CohortListView = () => {
   return (
     <div className='flex flex-col p-4 gap-4 text-[20px] font-medium'>
       <div className='flex gap-4'>
+        <Button name='all' title={'See All Cohorts'} onClick={changeCohorts} />
+
         <Button
           name={'user'}
           title={'See Your Registered Cohorts'}
           onClick={changeCohorts}
         />
-        <Button name='all' title={'See All Cohorts'} onClick={changeCohorts} />
       </div>
 
       {cohorts.length === 0 && (
@@ -90,7 +95,7 @@ const CohortListView = () => {
               if (member === exampleUser.id) return (registered = true)
             })}
 
-            {/*  if user has selected all cohorts then we will display all cohorts but register option will only be for those cohorts which were not already registered by user */}
+            {/*  We will display all cohorts but register option will be only for those cohorts which were not already registered by user */}
             {!userCohort && !registered ? (
               <Button
                 name={'user'}
