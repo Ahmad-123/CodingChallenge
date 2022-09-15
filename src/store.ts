@@ -1,4 +1,4 @@
-import { User, Course, Cohort } from './models'
+import { User, Course, Cohort } from 'models'
 
 // TODO: Give this user an id
 //  This is the logged in user
