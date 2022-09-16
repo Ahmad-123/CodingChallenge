@@ -3,12 +3,14 @@ import { CohortList, exampleUser } from 'store'
 import { Cohort as CohortType } from 'models'
 import Cohort from 'Shared/Cohort'
 import Button from 'Shared/Button'
+
+import { TOAST_SETTINGS } from 'Constants/index'
+
 import { toast } from 'react-toastify'
 
 const CohortListView = () => {
   const [userCohort, setUserCohort] = useState(false)
   const [cohorts, setCohorts] = useState(CohortList)
-
   const changeCohorts = (event: React.MouseEvent<HTMLElement>) => {
     const value = event.currentTarget.getAttribute('name')
     let userCohort // for state updation
@@ -36,15 +38,7 @@ const CohortListView = () => {
       //  cohart is already registered
       toast.error(
         'You have already registered the cohort for that course: You can have only 1 cohart against paricular course',
-        {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        }
+        TOAST_SETTINGS
       )
     } else {
       //  if that cohort is not already registered by the user then we will add that user to members list of that cohort
@@ -53,15 +47,7 @@ const CohortListView = () => {
         return cohort
       })
       setCohorts(temp)
-      toast.success('Cohort registered Successfully', {
-        position: 'top-right',
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
+      toast.success('Cohort registered Successfully', TOAST_SETTINGS)
     }
   }
 
@@ -71,14 +57,14 @@ const CohortListView = () => {
         <Button
           name={'all'}
           title={'See All Cohorts'}
-          selectedStatus={userCohort === true ? false : true}
+          selectedStatus={!userCohort}
           onClick={changeCohorts}
         />
 
         <Button
           name={'user'}
           title={'See Your Registered Cohorts'}
-          selectedStatus={userCohort === true ? true : false}
+          selectedStatus={userCohort}
           onClick={changeCohorts}
         />
       </div>
