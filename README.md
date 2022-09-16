@@ -13,9 +13,8 @@ For that you need to do:
 
 Feel free to create as many cohorts in the `store.ts` file as you like. The data schema of courses, users, and cohorts is described in `models.ts`.
 
-/////////////////////////// Ahmad Nawaz ////////////////////////////////////////////////////////////
 
-Brief description of implementation
+# Brief description of implementation (Ahmad Nawaz)
 
 1. Store.ts
     - I have used exmapleUser (from store) as a loggedIn user.
