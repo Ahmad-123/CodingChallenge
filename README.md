@@ -13,16 +13,15 @@ For that you need to do:
 
 Feel free to create as many cohorts in the `store.ts` file as you like. The data schema of courses, users, and cohorts is described in `models.ts`.
 
-/////////////////////////// Ahmad Nawaz ////////////////////////////////////////////////////////////
 
-Bried description of my implementation
+# Brief description of implementation (Ahmad Nawaz)
 
 1. Store.ts
-   a) I have used exmapleUser (from store) as a loggedIn user.
-   b) I have used CourseList instead of a singleCourse for better Visualization or app flow. All the courses in the CourseList are acting as the registered courses against the logged In user.
+    - I have used exmapleUser (from store) as a loggedIn user.
+    - I have used CourseList instead of a singleCourse for better Visualization or app flow. All the courses in the CourseList are the registered courses of logged In user.
 
 2. CohortListView.tsx
-   a) It will display all the available cohorts.
-   b) when user will click register Cohort. A new entry will be added to the members list of that cohart in CohartList.
-   c) A user can only register for 1 cohort against 1 course. Otherwise he will be shown an alert that he has already registered the cohort for that course.
-   d) Once the user will click See Registered Cohorts. All cohorts registered by the user for different courses will be displayed. By default a user will have 0 registered cohort.
+    - It will display all the available cohorts.
+    - when user will click register Cohort. A new entry will be added to the members list of that cohart in CohartList.
+    - A user can only register for 1 cohort against 1 course. Otherwise toast message will be displayed that he has already registered the cohort for that course.
+    - Once the user will click See Registered Cohorts. All cohorts registered by the user for different courses will be displayed. By default a user will have 0 registered cohort.
